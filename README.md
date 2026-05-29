@@ -40,14 +40,9 @@ In short: Aletheia is the on-chain half of the Hermes workflow. Hermes exports C
 
 ## Installation
 
-Add aletheia as a dependency in your `aiken.toml`:
+Add aletheia as a dependency:
 
-```toml
-[[dependencies]]
-name = "txpipe-shop/aletheia"
-version = "0.0.0"
-source = "github"
-```
+`aiken add --version 0.1.0 txpipe-shop/aletheia`
 
 Then import it in your Aiken code:
 
