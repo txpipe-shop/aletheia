@@ -1,0 +1,1003 @@
+{
+  "preamble": {
+    "title": "txpipe-shop/aletheia",
+    "description": "Aiken contracts for project 'txpipe-shop/aletheia'",
+    "version": "0.1.0",
+    "plutusVersion": "v3",
+    "compiler": {
+      "name": "Aiken",
+      "version": "v1.1.22+39d6b04"
+    },
+    "license": "Apache-2.0"
+  },
+  "validators": [],
+  "definitions": {
+    "Bool": {
+      "title": "Bool",
+      "anyOf": [
+        {
+          "title": "False",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": []
+        },
+        {
+          "title": "True",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": []
+        }
+      ]
+    },
+    "ByteArray": {
+      "title": "ByteArray",
+      "dataType": "bytes"
+    },
+    "Data": {
+      "title": "Data",
+      "description": "Any Plutus data."
+    },
+    "Int": {
+      "dataType": "integer"
+    },
+    "List<aiken/crypto/VerificationKeyHash>": {
+      "dataType": "list",
+      "items": {
+        "$ref": "#/definitions/aiken~1crypto~1VerificationKeyHash"
+      }
+    },
+    "List<aletheia/unsafe_transaction/UnsafeInput>": {
+      "dataType": "list",
+      "items": {
+        "$ref": "#/definitions/aletheia~1unsafe_transaction~1UnsafeInput"
+      }
+    },
+    "List<aletheia/unsafe_transaction/UnsafeOutput>": {
+      "dataType": "list",
+      "items": {
+        "$ref": "#/definitions/aletheia~1unsafe_transaction~1UnsafeOutput"
+      }
+    },
+    "List<cardano/certificate/Certificate>": {
+      "dataType": "list",
+      "items": {
+        "$ref": "#/definitions/cardano~1certificate~1Certificate"
+      }
+    },
+    "Never": {
+      "title": "Never",
+      "anyOf": [
+        {
+          "title": "Never",
+          "description": "Nothing.",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": []
+        }
+      ]
+    },
+    "Option<aiken/crypto/ScriptHash>": {
+      "title": "Option",
+      "anyOf": [
+        {
+          "title": "Some",
+          "description": "An optional value.",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "$ref": "#/definitions/aiken~1crypto~1ScriptHash"
+            }
+          ]
+        },
+        {
+          "title": "None",
+          "description": "Nothing.",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": []
+        }
+      ]
+    },
+    "Option<cardano/address/StakeCredential>": {
+      "title": "Option",
+      "anyOf": [
+        {
+          "title": "Some",
+          "description": "An optional value.",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "$ref": "#/definitions/cardano~1address~1StakeCredential"
+            }
+          ]
+        },
+        {
+          "title": "None",
+          "description": "Nothing.",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": []
+        }
+      ]
+    },
+    "Option<cardano/assets/Lovelace>": {
+      "title": "Option",
+      "anyOf": [
+        {
+          "title": "Some",
+          "description": "An optional value.",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "$ref": "#/definitions/cardano~1assets~1Lovelace"
+            }
+          ]
+        },
+        {
+          "title": "None",
+          "description": "Nothing.",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": []
+        }
+      ]
+    },
+    "Pair<aiken/crypto/DataHash,Data>": {
+      "title": "Pair",
+      "dataType": "#pair",
+      "left": {
+        "$ref": "#/definitions/aiken~1crypto~1DataHash"
+      },
+      "right": {
+        "$ref": "#/definitions/Data"
+      }
+    },
+    "Pair<aletheia/unsafe_transaction/UnsafeScriptPurpose,Data>": {
+      "title": "Pair",
+      "dataType": "#pair",
+      "left": {
+        "$ref": "#/definitions/aletheia~1unsafe_transaction~1UnsafeScriptPurpose"
+      },
+      "right": {
+        "$ref": "#/definitions/Data"
+      }
+    },
+    "Pair<cardano/address/Credential,cardano/assets/Lovelace>": {
+      "title": "Pair",
+      "dataType": "#pair",
+      "left": {
+        "$ref": "#/definitions/cardano~1address~1Credential"
+      },
+      "right": {
+        "$ref": "#/definitions/cardano~1assets~1Lovelace"
+      }
+    },
+    "Pair<cardano/assets/AssetName,Int>": {
+      "title": "Pair",
+      "dataType": "#pair",
+      "left": {
+        "$ref": "#/definitions/cardano~1assets~1AssetName"
+      },
+      "right": {
+        "$ref": "#/definitions/Int"
+      }
+    },
+    "Pair<cardano/assets/PolicyId,Pairs<cardano/assets/AssetName,Int>>": {
+      "title": "Pair",
+      "dataType": "#pair",
+      "left": {
+        "$ref": "#/definitions/cardano~1assets~1PolicyId"
+      },
+      "right": {
+        "$ref": "#/definitions/Pairs<cardano~1assets~1AssetName,Int>"
+      }
+    },
+    "Pairs<aiken/crypto/DataHash,Data>": {
+      "title": "Pairs<DataHash, Data>",
+      "dataType": "map",
+      "keys": {
+        "$ref": "#/definitions/aiken~1crypto~1DataHash"
+      },
+      "values": {
+        "$ref": "#/definitions/Data"
+      }
+    },
+    "Pairs<aletheia/unsafe_transaction/UnsafeScriptPurpose,Data>": {
+      "title": "Pairs<UnsafeScriptPurpose, Data>",
+      "dataType": "map",
+      "keys": {
+        "$ref": "#/definitions/aletheia~1unsafe_transaction~1UnsafeScriptPurpose"
+      },
+      "values": {
+        "$ref": "#/definitions/Data"
+      }
+    },
+    "Pairs<cardano/address/Credential,cardano/assets/Lovelace>": {
+      "title": "Pairs<Credential, Lovelace>",
+      "dataType": "map",
+      "keys": {
+        "$ref": "#/definitions/cardano~1address~1Credential"
+      },
+      "values": {
+        "$ref": "#/definitions/cardano~1assets~1Lovelace"
+      }
+    },
+    "Pairs<cardano/assets/AssetName,Int>": {
+      "title": "Pairs<AssetName, Int>",
+      "dataType": "map",
+      "keys": {
+        "$ref": "#/definitions/cardano~1assets~1AssetName"
+      },
+      "values": {
+        "$ref": "#/definitions/Int"
+      }
+    },
+    "Pairs<cardano/assets/PolicyId,Pairs<cardano/assets/AssetName,Int>>": {
+      "title": "Pairs<PolicyId, Pairs<AssetName, Int>>",
+      "dataType": "map",
+      "keys": {
+        "$ref": "#/definitions/cardano~1assets~1PolicyId"
+      },
+      "values": {
+        "$ref": "#/definitions/Pairs<cardano~1assets~1AssetName,Int>"
+      }
+    },
+    "aiken/crypto/DataHash": {
+      "title": "DataHash",
+      "dataType": "bytes"
+    },
+    "aiken/crypto/ScriptHash": {
+      "title": "ScriptHash",
+      "dataType": "bytes"
+    },
+    "aiken/crypto/VerificationKeyHash": {
+      "title": "VerificationKeyHash",
+      "dataType": "bytes"
+    },
+    "aiken/interval/IntervalBound": {
+      "title": "IntervalBound",
+      "description": "An interval bound, either inclusive or exclusive.",
+      "anyOf": [
+        {
+          "title": "IntervalBound",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "bound_type",
+              "$ref": "#/definitions/aiken~1interval~1IntervalBoundType"
+            },
+            {
+              "title": "is_inclusive",
+              "$ref": "#/definitions/Bool"
+            }
+          ]
+        }
+      ]
+    },
+    "aiken/interval/IntervalBoundType": {
+      "title": "IntervalBoundType",
+      "description": "A type of interval bound. The value for the `Finite` case typically\n represents a number of seconds or milliseconds.",
+      "anyOf": [
+        {
+          "title": "NegativeInfinity",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": []
+        },
+        {
+          "title": "Finite",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": [
+            {
+              "$ref": "#/definitions/Int"
+            }
+          ]
+        },
+        {
+          "title": "PositiveInfinity",
+          "dataType": "constructor",
+          "index": 2,
+          "fields": []
+        }
+      ]
+    },
+    "aletheia/unsafe_transaction/UnsafeInput": {
+      "title": "UnsafeInput",
+      "anyOf": [
+        {
+          "title": "UnsafeInput",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "output_reference",
+              "$ref": "#/definitions/cardano~1transaction~1OutputReference"
+            },
+            {
+              "title": "output",
+              "$ref": "#/definitions/aletheia~1unsafe_transaction~1UnsafeOutput"
+            }
+          ]
+        }
+      ]
+    },
+    "aletheia/unsafe_transaction/UnsafeOutput": {
+      "title": "UnsafeOutput",
+      "description": "An output of the transaction.",
+      "anyOf": [
+        {
+          "title": "UnsafeOutput",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "address",
+              "$ref": "#/definitions/cardano~1address~1Address"
+            },
+            {
+              "title": "value",
+              "$ref": "#/definitions/Pairs<cardano~1assets~1PolicyId,Pairs<cardano~1assets~1AssetName,Int>>"
+            },
+            {
+              "title": "datum",
+              "$ref": "#/definitions/cardano~1transaction~1Datum"
+            },
+            {
+              "title": "reference_script",
+              "$ref": "#/definitions/Option<aiken~1crypto~1ScriptHash>"
+            }
+          ]
+        }
+      ]
+    },
+    "aletheia/unsafe_transaction/UnsafeScriptPurpose": {
+      "title": "UnsafeScriptPurpose",
+      "description": "Mirrors ScriptPurpose from the Aiken stdlib with an additional\n `UnsafePropose` variant for governance proposals.",
+      "anyOf": [
+        {
+          "title": "Mint",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "$ref": "#/definitions/cardano~1assets~1PolicyId"
+            }
+          ]
+        },
+        {
+          "title": "Spend",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": [
+            {
+              "$ref": "#/definitions/cardano~1transaction~1OutputReference"
+            }
+          ]
+        },
+        {
+          "title": "Withdraw",
+          "dataType": "constructor",
+          "index": 2,
+          "fields": [
+            {
+              "$ref": "#/definitions/cardano~1address~1Credential"
+            }
+          ]
+        },
+        {
+          "title": "Publish",
+          "dataType": "constructor",
+          "index": 3,
+          "fields": [
+            {
+              "title": "at",
+              "$ref": "#/definitions/Int"
+            },
+            {
+              "title": "certificate",
+              "$ref": "#/definitions/cardano~1certificate~1Certificate"
+            }
+          ]
+        },
+        {
+          "title": "Vote",
+          "dataType": "constructor",
+          "index": 4,
+          "fields": [
+            {
+              "$ref": "#/definitions/cardano~1governance~1Voter"
+            }
+          ]
+        },
+        {
+          "title": "UnsafePropose",
+          "dataType": "constructor",
+          "index": 5,
+          "fields": [
+            {
+              "title": "at",
+              "$ref": "#/definitions/Int"
+            },
+            {
+              "title": "proposal_procedure",
+              "$ref": "#/definitions/Never"
+            }
+          ]
+        }
+      ]
+    },
+    "aletheia/unsafe_transaction/UnsafeTransaction": {
+      "title": "UnsafeTransaction",
+      "description": "The full transaction context passed to the on-chain validator.\n\n Fields typed as `Never` (`votes`, `proposal_procedures`) are\n intentionally unsupported and are hardcoded to empty defaults\n during conversion to the stdlib `Transaction`.",
+      "anyOf": [
+        {
+          "title": "UnsafeTransaction",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "inputs",
+              "$ref": "#/definitions/List<aletheia~1unsafe_transaction~1UnsafeInput>"
+            },
+            {
+              "title": "reference_inputs",
+              "$ref": "#/definitions/List<aletheia~1unsafe_transaction~1UnsafeInput>"
+            },
+            {
+              "title": "outputs",
+              "$ref": "#/definitions/List<aletheia~1unsafe_transaction~1UnsafeOutput>"
+            },
+            {
+              "title": "fee",
+              "$ref": "#/definitions/cardano~1assets~1Lovelace"
+            },
+            {
+              "title": "mint",
+              "$ref": "#/definitions/Pairs<cardano~1assets~1PolicyId,Pairs<cardano~1assets~1AssetName,Int>>"
+            },
+            {
+              "title": "certificates",
+              "$ref": "#/definitions/List<cardano~1certificate~1Certificate>"
+            },
+            {
+              "title": "withdrawals",
+              "$ref": "#/definitions/Pairs<cardano~1address~1Credential,cardano~1assets~1Lovelace>"
+            },
+            {
+              "title": "validity_range",
+              "$ref": "#/definitions/cardano~1transaction~1ValidityRange"
+            },
+            {
+              "title": "extra_signatories",
+              "$ref": "#/definitions/List<aiken~1crypto~1VerificationKeyHash>"
+            },
+            {
+              "title": "redeemers",
+              "$ref": "#/definitions/Pairs<aletheia~1unsafe_transaction~1UnsafeScriptPurpose,Data>"
+            },
+            {
+              "title": "datums",
+              "$ref": "#/definitions/Pairs<aiken~1crypto~1DataHash,Data>"
+            },
+            {
+              "title": "id",
+              "$ref": "#/definitions/cardano~1governance~1TransactionId"
+            },
+            {
+              "title": "votes",
+              "$ref": "#/definitions/Never"
+            },
+            {
+              "title": "proposal_procedures",
+              "$ref": "#/definitions/Never"
+            },
+            {
+              "title": "current_treasury_amount",
+              "$ref": "#/definitions/Option<cardano~1assets~1Lovelace>"
+            },
+            {
+              "title": "treasury_donation",
+              "$ref": "#/definitions/Option<cardano~1assets~1Lovelace>"
+            }
+          ]
+        }
+      ]
+    },
+    "cardano/address/Address": {
+      "title": "Address",
+      "description": "A Cardano `Address` typically holding one or two credential references.\n\n Note that legacy bootstrap addresses (a.k.a. 'Byron addresses') are\n completely excluded from Plutus contexts. Thus, from an on-chain\n perspective only exists addresses of type 00, 01, ..., 07 as detailed\n in [CIP-0019 :: Shelley Addresses](https://github.com/cardano-foundation/CIPs/tree/master/CIP-0019/#shelley-addresses).",
+      "anyOf": [
+        {
+          "title": "Address",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "payment_credential",
+              "$ref": "#/definitions/cardano~1address~1PaymentCredential"
+            },
+            {
+              "title": "stake_credential",
+              "$ref": "#/definitions/Option<cardano~1address~1StakeCredential>"
+            }
+          ]
+        }
+      ]
+    },
+    "cardano/address/Credential": {
+      "title": "Credential",
+      "description": "A general structure for representing an on-chain `Credential`.\n\n Credentials are always one of two kinds: a direct public/private key\n pair, or a script (native or Plutus).",
+      "anyOf": [
+        {
+          "title": "VerificationKey",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "$ref": "#/definitions/aiken~1crypto~1VerificationKeyHash"
+            }
+          ]
+        },
+        {
+          "title": "Script",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": [
+            {
+              "$ref": "#/definitions/aiken~1crypto~1ScriptHash"
+            }
+          ]
+        }
+      ]
+    },
+    "cardano/address/PaymentCredential": {
+      "title": "PaymentCredential",
+      "description": "A general structure for representing an on-chain `Credential`.\n\n Credentials are always one of two kinds: a direct public/private key\n pair, or a script (native or Plutus).",
+      "anyOf": [
+        {
+          "title": "VerificationKey",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "$ref": "#/definitions/aiken~1crypto~1VerificationKeyHash"
+            }
+          ]
+        },
+        {
+          "title": "Script",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": [
+            {
+              "$ref": "#/definitions/aiken~1crypto~1ScriptHash"
+            }
+          ]
+        }
+      ]
+    },
+    "cardano/address/StakeCredential": {
+      "title": "StakeCredential",
+      "description": "Represent a type of object that can be represented either inline (by hash)\n or via a reference (i.e. a pointer to an on-chain location).\n\n This is mainly use for capturing pointers to a stake credential\n registration certificate in the case of so-called pointer addresses.",
+      "anyOf": [
+        {
+          "title": "Inline",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "$ref": "#/definitions/cardano~1address~1Credential"
+            }
+          ]
+        },
+        {
+          "title": "Pointer",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": [
+            {
+              "title": "slot_number",
+              "$ref": "#/definitions/Int"
+            },
+            {
+              "title": "transaction_index",
+              "$ref": "#/definitions/Int"
+            },
+            {
+              "title": "certificate_index",
+              "$ref": "#/definitions/Int"
+            }
+          ]
+        }
+      ]
+    },
+    "cardano/assets/AssetName": {
+      "title": "AssetName",
+      "dataType": "bytes"
+    },
+    "cardano/assets/Lovelace": {
+      "title": "Lovelace",
+      "dataType": "integer"
+    },
+    "cardano/assets/PolicyId": {
+      "title": "PolicyId",
+      "dataType": "bytes"
+    },
+    "cardano/certificate/Certificate": {
+      "title": "Certificate",
+      "description": "An on-chain certificate attesting of some operation. Publishing\n certificates triggers different kind of rules; most of the time,\n they require signatures from specific keys.",
+      "anyOf": [
+        {
+          "title": "RegisterCredential",
+          "description": "Register a stake credential with an optional deposit amount.\n The deposit is always present when using the new registration certificate\n format available since the Conway era.",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "credential",
+              "$ref": "#/definitions/cardano~1address~1Credential"
+            },
+            {
+              "title": "deposit",
+              "description": "> [!NOTE]\n > The `deposit` ought to be an `Option<Lovelace>`, but due to unfortunate\n > circumstances it will always be instantiated to `None` even when set in\n > the host transaction. This is what the `Never` type captures here.",
+              "$ref": "#/definitions/Never"
+            }
+          ]
+        },
+        {
+          "title": "UnregisterCredential",
+          "description": "Un-Register a stake credential with an optional refund amount\n The deposit is always present when using the new de-registration certificate\n format available since the Conway era.",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": [
+            {
+              "title": "credential",
+              "$ref": "#/definitions/cardano~1address~1Credential"
+            },
+            {
+              "title": "refund",
+              "description": "> [!NOTE]\n > The `refund` ought to be an `Option<Lovelace>`, but due to unfortunate\n > circumstances it will always be instantiated to `None` even when set in\n > the host transaction. This is what the `Never` type captures here.",
+              "$ref": "#/definitions/Never"
+            }
+          ]
+        },
+        {
+          "title": "DelegateCredential",
+          "description": "Delegate stake to a [Delegate](#Delegate).",
+          "dataType": "constructor",
+          "index": 2,
+          "fields": [
+            {
+              "title": "credential",
+              "$ref": "#/definitions/cardano~1address~1Credential"
+            },
+            {
+              "title": "delegate",
+              "$ref": "#/definitions/cardano~1certificate~1Delegate"
+            }
+          ]
+        },
+        {
+          "title": "RegisterAndDelegateCredential",
+          "description": "Register and delegate staking credential to a Delegatee in one certificate.",
+          "dataType": "constructor",
+          "index": 3,
+          "fields": [
+            {
+              "title": "credential",
+              "$ref": "#/definitions/cardano~1address~1Credential"
+            },
+            {
+              "title": "delegate",
+              "$ref": "#/definitions/cardano~1certificate~1Delegate"
+            },
+            {
+              "title": "deposit",
+              "$ref": "#/definitions/cardano~1assets~1Lovelace"
+            }
+          ]
+        },
+        {
+          "title": "RegisterDelegateRepresentative",
+          "description": "Register a delegate representative (a.k.a DRep). The deposit is explicit and\n is refunded when the delegate steps down (unregister).",
+          "dataType": "constructor",
+          "index": 4,
+          "fields": [
+            {
+              "title": "delegate_representative",
+              "$ref": "#/definitions/cardano~1address~1Credential"
+            },
+            {
+              "title": "deposit",
+              "$ref": "#/definitions/cardano~1assets~1Lovelace"
+            }
+          ]
+        },
+        {
+          "title": "UpdateDelegateRepresentative",
+          "description": "Update a delegate representative (a.k.a DRep). The certificate also contains\n metadata which aren't visible on-chain.",
+          "dataType": "constructor",
+          "index": 5,
+          "fields": [
+            {
+              "title": "delegate_representative",
+              "$ref": "#/definitions/cardano~1address~1Credential"
+            }
+          ]
+        },
+        {
+          "title": "UnregisterDelegateRepresentative",
+          "description": "UnRegister a delegate representative, and refund back its past deposit.",
+          "dataType": "constructor",
+          "index": 6,
+          "fields": [
+            {
+              "title": "delegate_representative",
+              "$ref": "#/definitions/cardano~1address~1Credential"
+            },
+            {
+              "title": "refund",
+              "$ref": "#/definitions/cardano~1assets~1Lovelace"
+            }
+          ]
+        },
+        {
+          "title": "RegisterStakePool",
+          "description": "Register a new stake pool",
+          "dataType": "constructor",
+          "index": 7,
+          "fields": [
+            {
+              "title": "stake_pool",
+              "description": "The hash digest of the stake pool's cold (public) key",
+              "$ref": "#/definitions/cardano~1certificate~1StakePoolId"
+            },
+            {
+              "title": "vrf",
+              "description": "The hash digest of the stake pool's VRF (public) key",
+              "$ref": "#/definitions/aiken~1crypto~1VerificationKeyHash"
+            }
+          ]
+        },
+        {
+          "title": "RetireStakePool",
+          "description": "Retire a stake pool. 'at_epoch' indicates in which the retirement will take place",
+          "dataType": "constructor",
+          "index": 8,
+          "fields": [
+            {
+              "title": "stake_pool",
+              "$ref": "#/definitions/cardano~1certificate~1StakePoolId"
+            },
+            {
+              "title": "at_epoch",
+              "$ref": "#/definitions/Int"
+            }
+          ]
+        },
+        {
+          "title": "AuthorizeConstitutionalCommitteeProxy",
+          "description": "Authorize a Hot credential for a specific Committee member's cold credential",
+          "dataType": "constructor",
+          "index": 9,
+          "fields": [
+            {
+              "title": "constitutional_committee_member",
+              "$ref": "#/definitions/cardano~1address~1Credential"
+            },
+            {
+              "title": "proxy",
+              "$ref": "#/definitions/cardano~1address~1Credential"
+            }
+          ]
+        },
+        {
+          "title": "RetireFromConstitutionalCommittee",
+          "description": "Step down from the constitutional committee as a member.",
+          "dataType": "constructor",
+          "index": 10,
+          "fields": [
+            {
+              "title": "constitutional_committee_member",
+              "$ref": "#/definitions/cardano~1address~1Credential"
+            }
+          ]
+        }
+      ]
+    },
+    "cardano/certificate/Delegate": {
+      "title": "Delegate",
+      "description": "A type of stake delegation that can be either block-production, vote or\n both. Note that delegation types aren't cancelling one another, so it is\n possible to delegate block production in one transaction, and delegate vote\n in another. This second delegation **does NOT** invalidate the first one.",
+      "anyOf": [
+        {
+          "title": "DelegateBlockProduction",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "stake_pool",
+              "$ref": "#/definitions/cardano~1certificate~1StakePoolId"
+            }
+          ]
+        },
+        {
+          "title": "DelegateVote",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": [
+            {
+              "title": "delegate_representative",
+              "$ref": "#/definitions/cardano~1certificate~1DelegateRepresentative"
+            }
+          ]
+        },
+        {
+          "title": "DelegateBoth",
+          "dataType": "constructor",
+          "index": 2,
+          "fields": [
+            {
+              "title": "stake_pool",
+              "$ref": "#/definitions/cardano~1certificate~1StakePoolId"
+            },
+            {
+              "title": "delegate_representative",
+              "$ref": "#/definitions/cardano~1certificate~1DelegateRepresentative"
+            }
+          ]
+        }
+      ]
+    },
+    "cardano/certificate/DelegateRepresentative": {
+      "title": "DelegateRepresentative",
+      "anyOf": [
+        {
+          "title": "Registered",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "$ref": "#/definitions/cardano~1address~1Credential"
+            }
+          ]
+        },
+        {
+          "title": "AlwaysAbstain",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": []
+        },
+        {
+          "title": "AlwaysNoConfidence",
+          "dataType": "constructor",
+          "index": 2,
+          "fields": []
+        }
+      ]
+    },
+    "cardano/certificate/StakePoolId": {
+      "title": "StakePoolId",
+      "dataType": "bytes"
+    },
+    "cardano/governance/TransactionId": {
+      "title": "TransactionId",
+      "dataType": "bytes"
+    },
+    "cardano/governance/Voter": {
+      "title": "Voter",
+      "anyOf": [
+        {
+          "title": "ConstitutionalCommitteeMember",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "$ref": "#/definitions/cardano~1address~1Credential"
+            }
+          ]
+        },
+        {
+          "title": "DelegateRepresentative",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": [
+            {
+              "$ref": "#/definitions/cardano~1address~1Credential"
+            }
+          ]
+        },
+        {
+          "title": "StakePool",
+          "dataType": "constructor",
+          "index": 2,
+          "fields": [
+            {
+              "$ref": "#/definitions/aiken~1crypto~1VerificationKeyHash"
+            }
+          ]
+        }
+      ]
+    },
+    "cardano/transaction/Datum": {
+      "title": "Datum",
+      "description": "An output `Datum`.",
+      "anyOf": [
+        {
+          "title": "NoDatum",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": []
+        },
+        {
+          "title": "DatumHash",
+          "description": "A datum referenced by its hash digest.",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": [
+            {
+              "$ref": "#/definitions/aiken~1crypto~1DataHash"
+            }
+          ]
+        },
+        {
+          "title": "InlineDatum",
+          "description": "A datum completely inlined in the output.",
+          "dataType": "constructor",
+          "index": 2,
+          "fields": [
+            {
+              "$ref": "#/definitions/Data"
+            }
+          ]
+        }
+      ]
+    },
+    "cardano/transaction/OutputReference": {
+      "title": "OutputReference",
+      "description": "An `OutputReference` is a unique reference to an output on-chain. The `output_index`\n corresponds to the position in the output list of the transaction (identified by its id)\n that produced that output",
+      "anyOf": [
+        {
+          "title": "OutputReference",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "transaction_id",
+              "$ref": "#/definitions/ByteArray"
+            },
+            {
+              "title": "output_index",
+              "$ref": "#/definitions/Int"
+            }
+          ]
+        }
+      ]
+    },
+    "cardano/transaction/ValidityRange": {
+      "title": "ValidityRange",
+      "description": "A type to represent intervals of values. Interval are inhabited by an\n integer value representing  have a finite lower-bound and/or upper-bound.\n\n This allows to represent all kind of mathematical intervals:\n\n ```aiken\n // [1; 10]\n let i0: Interval = Interval\n   { lower_bound:\n       IntervalBound { bound_type: Finite(1), is_inclusive: True }\n   , upper_bound:\n       IntervalBound { bound_type: Finite(10), is_inclusive: True }\n   }\n ```\n\n ```aiken\n // (20; infinity)\n let i1: Interval = Interval\n   { lower_bound:\n       IntervalBound { bound_type: Finite(20), is_inclusive: False }\n   , upper_bound:\n       IntervalBound { bound_type: PositiveInfinity, is_inclusive: False }\n   }\n ```",
+      "anyOf": [
+        {
+          "title": "Interval",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "lower_bound",
+              "$ref": "#/definitions/aiken~1interval~1IntervalBound"
+            },
+            {
+              "title": "upper_bound",
+              "$ref": "#/definitions/aiken~1interval~1IntervalBound"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
