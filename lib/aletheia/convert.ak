@@ -1,11 +1,11 @@
 use aiken/collection/dict
 use aiken/collection/list
+use aletheia/unsafe_transaction.{
+  Mint, Publish, Spend, UnsafeInput, UnsafeOutput, UnsafePropose,
+  UnsafeScriptPurpose, UnsafeTransaction, Vote, Withdraw,
+}
 use cardano/assets
 use cardano/transaction.{Input, Output, ScriptPurpose, Transaction}
-use aletheia/unsafe_transaction.{
-  Mint, UnsafeInput, UnsafeOutput, UnsafePropose, UnsafeScriptPurpose,
-  UnsafeTransaction, Publish, Spend, Vote, Withdraw,
-}
 
 pub fn unsafe_input_to_input(input: UnsafeInput) -> Input {
   Input {
@@ -53,10 +53,13 @@ pub fn unsafe_script_purpose_to_script_purpose(
 pub fn unsafe_redeemers_to_redeemers(
   redeemers: List<Pair<UnsafeScriptPurpose, Data>>,
 ) -> List<Pair<ScriptPurpose, Data>> {
-  list.map(redeemers, fn(pair) {
-    let Pair(purpose, data) = pair
-    Pair(unsafe_script_purpose_to_script_purpose(purpose), data)
-  })
+  list.map(
+    redeemers,
+    fn(pair) {
+      let Pair(purpose, data) = pair
+      Pair(unsafe_script_purpose_to_script_purpose(purpose), data)
+    },
+  )
 }
 
 /// Convert an `UnsafeTransaction` into a stdlib `Transaction`.
@@ -68,7 +71,10 @@ pub fn unsafe_transaction_to_transaction(
 ) -> Transaction {
   Transaction {
     inputs: list.map(unsafe_tx.inputs, unsafe_input_to_input),
-    reference_inputs: list.map(unsafe_tx.reference_inputs, unsafe_input_to_input),
+    reference_inputs: list.map(
+      unsafe_tx.reference_inputs,
+      unsafe_input_to_input,
+    ),
     outputs: list.map(unsafe_tx.outputs, unsafe_output_to_output),
     fee: unsafe_tx.fee,
     mint: assets.from_asset_list(unsafe_tx.mint),
@@ -85,5 +91,3 @@ pub fn unsafe_transaction_to_transaction(
     treasury_donation: unsafe_tx.treasury_donation,
   }
 }
-
-
