@@ -4,8 +4,30 @@ use aletheia/unsafe_transaction.{
   Mint, Publish, Spend, UnsafeInput, UnsafeOutput, UnsafePropose,
   UnsafeScriptPurpose, UnsafeTransaction, Vote, Withdraw,
 }
-use cardano/assets
+use cardano/assets.{AssetName, PolicyId, Value}
 use cardano/transaction.{Input, Output, ScriptPurpose, Transaction}
+
+/// Convert a list of pairs representing a multi-asset value into a stdlib `Value`.
+/// In contrast to from_assets from stdlib, this function doesn't care about order or the
+/// absence of repeated policies/asset names, everything is allowed
+pub fn pairs_to_value(pairs: Pairs<PolicyId, Pairs<AssetName, Int>>) -> Value {
+  list.foldr(
+    pairs,
+    assets.zero,
+    fn(pair, acc) {
+      let Pair(policy_id, assets_list) = pair
+      let sub_value = list.foldr(
+        assets_list,
+        assets.zero,
+        fn(asset_pair, acc) {
+          let Pair(asset_name, amount) = asset_pair
+          assets.add(acc, policy_id, asset_name, amount)
+        },
+      )
+      assets.merge(acc, sub_value)
+    },
+  )
+}
 
 pub fn unsafe_input_to_input(input: UnsafeInput) -> Input {
   Input {
@@ -18,7 +40,7 @@ pub fn unsafe_input_to_input(input: UnsafeInput) -> Input {
 pub fn unsafe_output_to_output(output: UnsafeOutput) -> Output {
   Output {
     address: output.address,
-    value: assets.from_asset_list(output.value),
+    value: pairs_to_value(output.value),
     datum: output.datum,
     reference_script: output.reference_script,
   }
@@ -77,7 +99,7 @@ pub fn unsafe_transaction_to_transaction(
     ),
     outputs: list.map(unsafe_tx.outputs, unsafe_output_to_output),
     fee: unsafe_tx.fee,
-    mint: assets.from_asset_list(unsafe_tx.mint),
+    mint: pairs_to_value(unsafe_tx.mint),
     certificates: unsafe_tx.certificates,
     withdrawals: unsafe_tx.withdrawals,
     validity_range: unsafe_tx.validity_range,
